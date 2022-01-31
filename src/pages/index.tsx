@@ -49,7 +49,7 @@ const Home: NextPage = () => {
     settingOn ? setSettingOn(false) : setSettingOn(true);
   }
   function resetClock(taskTab:number){ 
-    setClockTime(parseInt((timeSetting as any)[Object.keys(timeSetting)[taskTab]]));
+    setClockTime(parseInt((timeSetting as any)[Object.keys(timeSetting)[taskTab]])*60);
   }
   function changeClockDoneStatus(){
     clockdone ? setclockdone(false) : setclockdone(true);
@@ -125,15 +125,15 @@ const Home: NextPage = () => {
   },[taskTab,timeSetting]); 
   useEffect(()=>{    
     colorInUse.current = ['#301B3F','#B4A5A5','#3C415C','#151515'];
-    const getDarkColor = axios.get('http://localhost:3000/api/dark');
-    const getLightColor = axios.get('http://localhost:3000/api/light');
+    const getDarkColor = axios.get('/api/dark');
+    const getLightColor = axios.get('/api/light');
     Promise.all([getDarkColor,getLightColor]).then((result)=>{
       darkColor.current = result[0].data;
       lightColor.current = result[1].data;
       setIsLoadingColor(false);
     }).then(()=>{
-      const getNightColor = axios.get('http://localhost:3000/api/night');
-      const getNeonColor = axios.get('http://localhost:3000/api/spring');
+      const getNightColor = axios.get('/api/night');
+      const getNeonColor = axios.get('/api/spring');
       Promise.all([getNightColor,getNeonColor]).then((result)=>{
         darkColor.current = [...darkColor.current,...result[0].data] as never;
         lightColor.current = [...lightColor.current,...result[0].data] as never;
