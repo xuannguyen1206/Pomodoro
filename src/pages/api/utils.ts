@@ -10,10 +10,6 @@ async function scrapePage(url:string){
     defaultViewport: chrome.defaultViewport,
   });
   const page = await browser.newPage();
-  await page.setViewport({
-    width: 1920,
-    height: 1080
-  })
   await page.goto(url,{waitUntil:'networkidle0'});
   await autoScroll(page);
   let markup = await page.content();

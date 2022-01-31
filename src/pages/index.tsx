@@ -125,32 +125,29 @@ const Home: NextPage = () => {
   },[taskTab,timeSetting]); 
   useEffect(()=>{    
     colorInUse.current = ['#301B3F','#B4A5A5','#3C415C','#151515'];
-    // const getDarkColor = axios.get('/api/dark');
-    // const getLightColor = axios.get('/api/light');
-    // Promise.all([getDarkColor,getLightColor]).then((result)=>{
-    //   darkColor.current = result[0].data;
-    //   console.log(darkColor.current[39  ]);
-      
-    //   lightColor.current = result[1].data;
-    //   setIsLoadingColor(false);
-    // }).then(()=>{
-    //   const getNightColor = axios.get('/api/night');
-    //   const getNeonColor = axios.get('/api/spring');
-    //   Promise.all([getNightColor,getNeonColor]).then((result)=>{
-    //     darkColor.current = [...darkColor.current,...result[0].data] as never;
-    //     lightColor.current = [...lightColor.current,...result[0].data] as never;
-    //     setIsLoadingAdditionalColor(false);
+    const getDarkColor = axios.get('/api/dark');
+    const getLightColor = axios.get('/api/light');
+    Promise.all([getDarkColor,getLightColor]).then((result)=>{
+      darkColor.current = result[0].data;      
+      lightColor.current = result[1].data;
+      setIsLoadingColor(false);
+    }).then(()=>{
+      const getNightColor = axios.get('/api/night');
+      const getNeonColor = axios.get('/api/spring');
+      Promise.all([getNightColor,getNeonColor]).then((result)=>{
+        darkColor.current = [...darkColor.current,...result[0].data] as never;
+        lightColor.current = [...lightColor.current,...result[0].data] as never;
+        setIsLoadingAdditionalColor(false);
         
-    //   }).catch((errror)=>{
-    //     console.log(errror);
-    //   })
+      }).catch((errror)=>{
+        console.log(errror);
+      })
       
-    // })
-    axios.get('/api/dark').then((result)=>{
-      darkColor.current = result.data;
-      console.log(darkColor.current.length);
-      setIsLoadingColor(false)
     })
+    // axios.get('/api/dark').then((result)=>{
+    //   darkColor.current = result.data;
+    //   console.log(darkColor.current.length);
+    // })
   },[])
 
   return (
