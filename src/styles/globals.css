@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .slide + span:before{
+    transform: translateX(120%);
+  }
+  .slide + span{
+    background-color: rgb(161, 136, 24);
+  }
+  .black-out{
+    filter: brightness(0);
+  }
+  .circle{
+    stroke-dasharray: 351.68;
+  }
+}
+
+
+
+
+@media (max-height:700px) {
+  .short{
+    padding-top: 0.25rem;
+  }
+}
