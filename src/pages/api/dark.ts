@@ -11,6 +11,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+  console.log('yay')
   if(color.length === 0) {
     color = await scrapePage(`https://colorhunt.co/palettes/dark`);
   }
