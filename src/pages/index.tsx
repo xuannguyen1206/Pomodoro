@@ -148,6 +148,7 @@ const Home: NextPage = () => {
     // })
     axios.get('/api/dark').then((result)=>{
       darkColor.current = result.data;
+      console.log(darkColor.current.length);
       setIsLoadingColor(false)
     })
   },[])

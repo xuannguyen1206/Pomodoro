@@ -6,7 +6,7 @@ async function scrapePage(url:string){
   const browser = await puppeteer.launch({
     args: chrome.args,
     executablePath: await chrome.executablePath,
-    headless: false,
+    headless: true,
     defaultViewport: chrome.defaultViewport,
   });
   const page = await browser.newPage();
@@ -41,7 +41,7 @@ async function autoScroll(page:any){
   await page.evaluate(async () => {
       await new Promise<void>((resolve, reject) => {
           var totalHeight = 0;
-          var distance = 300;
+          var distance = 5000;
           var timer = setInterval(() => {
               var scrollHeight = document.body.scrollHeight;
               window.scrollBy(0, distance);
@@ -51,7 +51,7 @@ async function autoScroll(page:any){
                   clearInterval(timer);
                   resolve();
               }
-          }, 100);
+          }, 1);
       });
   });
 }
