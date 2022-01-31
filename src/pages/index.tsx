@@ -139,6 +139,8 @@ const Home: NextPage = () => {
         lightColor.current = [...lightColor.current,...result[0].data] as never;
         setIsLoadingAdditionalColor(false);
         
+      }).catch((errror)=>{
+        console.log(errror);
       })
       
     })
