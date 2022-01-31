@@ -36,7 +36,6 @@ const Home: NextPage = () => {
   const [barColor,setBarColor] = useState('');
   const [background,setBackground] = useState('');
   const [isLoadingColor,setIsLoadingColor] = useState(true);
-  const [isLoadingAdditionalColor,setIsLoadingAdditionalColor] = useState(true);
   const colorInUse = useRef<Array<string>>([]);
   const darkColor = useRef([]);
   const lightColor = useRef([])
@@ -136,18 +135,16 @@ const Home: NextPage = () => {
       const getNeonColor = axios.get('/api/spring');
       Promise.all([getNightColor,getNeonColor]).then((result)=>{
         darkColor.current = [...darkColor.current,...result[0].data] as never;
-        lightColor.current = [...lightColor.current,...result[0].data] as never;
-        setIsLoadingAdditionalColor(false);
-        
-      }).catch((errror)=>{
-        console.log(errror);
+        lightColor.current = [...lightColor.current,...result[1].data] as never;        
+      }).then(()=>{
+        const getWarmColor = axios.get('/api/warm');
+        const getRainbowColor = axios.get('/api/rainbow')
+        Promise.all([getWarmColor,getRainbowColor]).then((result)=>{
+          darkColor.current = [...darkColor.current,...result[0].data] as never;
+          lightColor.current = [...lightColor.current,...result[1].data] as never;        
+        })
       })
-      
     })
-    // axios.get('/api/dark').then((result)=>{
-    //   darkColor.current = result.data;
-    //   console.log(darkColor.current.length);
-    // })
   },[])
 
   return (
