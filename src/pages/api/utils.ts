@@ -1,8 +1,14 @@
 const puppeteer = require('puppeteer');
 const cheerio = require('react-native-cheerio');
+const chrome = require('chrome-aws-lambda');
 
 async function scrapePage(url:string){
-  const browser = await puppeteer.launch({defaultViewport:null});
+  const browser = await puppeteer.launch({
+    args: chrome.args,
+    executablePath: await chrome.executablePath,
+    headless: true,
+    defaultViewport: chrome.defaultViewport,
+  });
   const page = await browser.newPage();
   await page.setViewport({
     width: 1920,
