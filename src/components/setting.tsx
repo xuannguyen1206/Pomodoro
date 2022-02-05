@@ -13,13 +13,14 @@ function Setting({selected,toggle,updateTimeSettings}:{selected:boolean,toggle:(
   function collectInput(data:timeSetting){
     updateTimeSettings(data);
     toggle();
+    setErrorMessage('');
   }
   function onError(errors:any){
     console.log(Object.keys(errors)[0],':',errors[Object.keys(errors)[0]].message)
     setErrorMessage(`${Object.keys(errors)[0]}: ${errors[Object.keys(errors)[0]].message}`)
   }
   return ( 
-    <section className={`bg-white w-11/12 h-[90%] absolute rounded-2xl md:h-[70%] md:w-[60%] xl:w-[50%] xl:h-[65%] xl:max-w-[700px] short:h-[92%] ${selected ? 'block': 'hidden'}`} >
+    <section className={`bg-white w-11/12 h-[90%] absolute rounded-2xl md:h-[70%] md:w-[60%] xl:w-[50%] xl:h-[65%] xl:max-w-[700px] short:h-[95%] ${selected ? 'block': 'hidden'}`} >
       <div className=" h-[12%] p-4 py-3 border-b-2 border-solid border-black, border-opacity-50 flex items-center justify-between md:p-10 short:p-2">
         <span className="font-semibold text-lg">Settings</span>
         <span className=" text-4xl cursor-pointer select-none" onClick={toggle}>&#215;</span>
