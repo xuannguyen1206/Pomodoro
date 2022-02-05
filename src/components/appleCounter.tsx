@@ -11,12 +11,12 @@ function AppleCounter({appleNum,setAppleNum,color}:{appleNum:number,setAppleNum:
     else setAppleNum(appleNum-1);    
   }
   return ( 
-    <section style={{backgroundColor:`${color}`}} className="bg-test-bar p-2 w-11/12 flex items-center justify-around mt-4 rounded-full  md:w-96 lg:w-[30rem] lg:p-3">
+    <section style={{backgroundColor:`${color}`}} className=" bg-test-bar p-2 w-11/12 flex items-center justify-around mt-4 rounded-full  md:w-96 lg:w-[30rem] lg:p-3 short:mt-2">
       <i className="fas fa-minus text-xl cursor-pointer text-white transition-property-[transform] duration-150 hover:scale-125" onClick={minusApple} />
         <div className="w-6 h-6 select-none lg:w-8 lg:h-8">
           <Image className={`${appleNum > 0 ? '' : 'black-out'}`} src='/apple.png' width={330} height={362} layout="intrinsic"/>
         </div>
-        <div className="w-6 h- select-none lg:w-8 lg:h-8">
+        <div className="w-6 h-6 select-none lg:w-8 lg:h-8">
           <Image className={`${appleNum > 1 ? '' : 'black-out'}`} src='/apple.png' width={330} height={362} layout="intrinsic"/>
         </div>
         <div className="w-6 h-6 select-none lg:w-8 lg:h-8">

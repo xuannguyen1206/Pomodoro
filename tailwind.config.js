@@ -16,6 +16,9 @@ module.exports = {
       },
       fontFamily:{
         'Amatic': ['Amatic SC', 'cursive']
+      },
+      screens: {
+        'short': { 'raw': '(max-height: 550px)' },
       }
     },
   },

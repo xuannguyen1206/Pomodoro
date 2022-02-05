@@ -13,6 +13,7 @@ async function scrapePage(url:string){
   await page.goto(url,{waitUntil:'networkidle0'});
   await autoScroll(page);
   let markup = await page.content();
+  page.close();
   return scrapeData(markup);
 }
 

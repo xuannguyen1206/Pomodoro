@@ -110,41 +110,35 @@ const Home: NextPage = () => {
   useEffect(()=>{
     updateApple();
     updateTaskbar();
-    if(alarm.current){
-      if(alarm.current.muted){
-        alarm.current.muted = false;
-      } else {
-        alarm.current.play()
-      }
-    }
+    alarm.current?.play()
     },[clockdone])
 
   useEffect(()=>{
     resetClock(taskTab);
   },[taskTab,timeSetting]); 
   useEffect(()=>{    
-    colorInUse.current = ['#301B3F','#B4A5A5','#3C415C','#151515'];
-    const getDarkColor = axios.get('/api/dark');
-    const getLightColor = axios.get('/api/light');
-    Promise.all([getDarkColor,getLightColor]).then((result)=>{
-      darkColor.current = result[0].data;      
-      lightColor.current = result[1].data;
-      setIsLoadingColor(false);
-    }).then(()=>{
-      const getNightColor = axios.get('/api/night');
-      const getNeonColor = axios.get('/api/spring');
-      Promise.all([getNightColor,getNeonColor]).then((result)=>{
-        darkColor.current = [...darkColor.current,...result[0].data] as never;
-        lightColor.current = [...lightColor.current,...result[1].data] as never;        
-      }).then(()=>{
-        const getWarmColor = axios.get('/api/warm');
-        const getRainbowColor = axios.get('/api/rainbow')
-        Promise.all([getWarmColor,getRainbowColor]).then((result)=>{
-          darkColor.current = [...darkColor.current,...result[0].data] as never;
-          lightColor.current = [...lightColor.current,...result[1].data] as never;        
-        })
-      })
-    })
+    // colorInUse.current = ['#301B3F','#B4A5A5','#3C415C','#151515'];
+    // const getDarkColor = axios.get('/api/dark');
+    // const getLightColor = axios.get('/api/light');
+    // Promise.all([getDarkColor,getLightColor]).then((result)=>{
+    //   darkColor.current = result[0].data;      
+    //   lightColor.current = result[1].data;
+    //   setIsLoadingColor(false);
+    // }).then(()=>{
+    //   const getNightColor = axios.get('/api/night');
+    //   const getNeonColor = axios.get('/api/spring');
+    //   Promise.all([getNightColor,getNeonColor]).then((result)=>{
+    //     darkColor.current = [...darkColor.current,...result[0].data] as never;
+    //     lightColor.current = [...lightColor.current,...result[1].data] as never;        
+    //   }).then(()=>{
+    //     const getWarmColor = axios.get('/api/warm');
+    //     const getRainbowColor = axios.get('/api/rainbow')
+    //     Promise.all([getWarmColor,getRainbowColor]).then((result)=>{
+    //       darkColor.current = [...darkColor.current,...result[0].data] as never;
+    //       lightColor.current = [...lightColor.current,...result[1].data] as never;        
+    //     })
+    //   })
+    // })
   },[])
 
   return (
@@ -155,15 +149,15 @@ const Home: NextPage = () => {
        <link href="./all.css" rel="stylesheet"></link>
        <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet"/> 
      </Head>
-     <main onClick={stopAlarm} style={{backgroundImage:background}} className='bg-gradient h-screen flex flex-col items-center justify-evenly'>
-        <h1 style={{color :`${colorInUse.current[3]}`}} className=' select-none text-3xl pt-7 text-center text-test-circle short transition-property-[color] duration-1000 lg:text-4xl xl:text-5xl'>pomodoro</h1>
-        <div className=' w-full flex flex-col items-center'>
+     <main  onClick={()=>{stopAlarm; (alarm.current as any).muted = false}} onTouchStart={()=>{stopAlarm; (alarm.current as any).muted = false}} style={{backgroundImage:background}} className='bg-gradient h-screen flex flex-col items-center justify-evenly'>
+        <h1 style={{color :`${colorInUse.current[3]}`}} className=' short:text-2xl select-none text-3xl text-center text-test-circle short transition-property-[color] duration-1000 lg:text-4xl xl:text-5xl'>pomodoro</h1>
+        <div className='  w-full flex flex-col items-center'>
           <Taskbar color={barColor} taskTab={taskTab} setTaskTab={setTaskTab} />
           <AppleCounter color={barColor} setAppleNum = {setAppleNum} appleNum = {appleNum}/>
         </div>
         <Clock changeColor={changeColor} isLoadingColor={isLoadingColor} keepTab={keeptab} shuffleColor={shuffleAndSetColor} colors={circleColors} setKeepTab={setKeepTab} taskTab={taskTab} clockTime = {clockTime} changeClockDoneStatus = {changeClockDoneStatus} clockdone={clockdone}/>
         <audio ref={alarm}  muted={true} className='hidden' src='./ringtone.mp3'/>
-        <i style={{color :`${colorInUse.current[3]}`}} className="fas fa-cog mt-4 text-test-circle text-4xl lg:text-5xl" onClick={toggleSetting}></i>
+        <i style={{color :`${colorInUse.current[3]}`}} className="fas fa-cog mt-4 text-test-circle text-4xl lg:text-5xl short:text-2xl" onClick={toggleSetting}></i>
         <Setting selected={settingOn} updateTimeSettings = {updateTimeSettings} toggle={toggleSetting}/>
      </main>
     </>
