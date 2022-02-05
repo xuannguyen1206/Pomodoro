@@ -150,7 +150,7 @@ const Home: NextPage = () => {
        <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet"/> 
      </Head>
      <main  onClick={()=>{stopAlarm; (alarm.current as any).muted = false}} onTouchStart={()=>{stopAlarm; (alarm.current as any).muted = false}} style={{backgroundImage:background}} className='bg-gradient h-screen flex flex-col items-center justify-evenly'>
-        <h1 style={{color :`${colorInUse.current[3]}`}} className=' short:text-2xl select-none text-3xl text-center text-test-circle short transition-property-[color] duration-1000 lg:text-4xl xl:text-5xl'>pomodoro</h1>
+        <h1 style={{color :`${colorInUse.current[3]}`}} className='  select-none text-3xl text-center text-test-circle transition-property-[color] duration-1000 lg:text-4xl xl:text-5xl short:text-2xl'>pomodoro</h1>
         <div className='  w-full flex flex-col items-center'>
           <Taskbar color={barColor} taskTab={taskTab} setTaskTab={setTaskTab} />
           <AppleCounter color={barColor} setAppleNum = {setAppleNum} appleNum = {appleNum}/>
