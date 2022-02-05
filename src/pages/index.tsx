@@ -117,28 +117,28 @@ const Home: NextPage = () => {
     resetClock(taskTab);
   },[taskTab,timeSetting]); 
   useEffect(()=>{    
-    // colorInUse.current = ['#301B3F','#B4A5A5','#3C415C','#151515'];
-    // const getDarkColor = axios.get('/api/dark');
-    // const getLightColor = axios.get('/api/light');
-    // Promise.all([getDarkColor,getLightColor]).then((result)=>{
-    //   darkColor.current = result[0].data;      
-    //   lightColor.current = result[1].data;
-    //   setIsLoadingColor(false);
-    // }).then(()=>{
-    //   const getNightColor = axios.get('/api/night');
-    //   const getNeonColor = axios.get('/api/spring');
-    //   Promise.all([getNightColor,getNeonColor]).then((result)=>{
-    //     darkColor.current = [...darkColor.current,...result[0].data] as never;
-    //     lightColor.current = [...lightColor.current,...result[1].data] as never;        
-    //   }).then(()=>{
-    //     const getWarmColor = axios.get('/api/warm');
-    //     const getRainbowColor = axios.get('/api/rainbow')
-    //     Promise.all([getWarmColor,getRainbowColor]).then((result)=>{
-    //       darkColor.current = [...darkColor.current,...result[0].data] as never;
-    //       lightColor.current = [...lightColor.current,...result[1].data] as never;        
-    //     })
-    //   })
-    // })
+    colorInUse.current = ['#301B3F','#B4A5A5','#3C415C','#151515'];
+    const getDarkColor = axios.get('/api/dark');
+    const getLightColor = axios.get('/api/light');
+    Promise.all([getDarkColor,getLightColor]).then((result)=>{
+      darkColor.current = result[0].data;      
+      lightColor.current = result[1].data;
+      setIsLoadingColor(false);
+    }).then(()=>{
+      const getNightColor = axios.get('/api/night');
+      const getNeonColor = axios.get('/api/spring');
+      Promise.all([getNightColor,getNeonColor]).then((result)=>{
+        darkColor.current = [...darkColor.current,...result[0].data] as never;
+        lightColor.current = [...lightColor.current,...result[1].data] as never;        
+      }).then(()=>{
+        const getWarmColor = axios.get('/api/warm');
+        const getRainbowColor = axios.get('/api/rainbow')
+        Promise.all([getWarmColor,getRainbowColor]).then((result)=>{
+          darkColor.current = [...darkColor.current,...result[0].data] as never;
+          lightColor.current = [...lightColor.current,...result[1].data] as never;        
+        })
+      })
+    })
   },[])
 
   return (
