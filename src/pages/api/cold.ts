@@ -12,7 +12,7 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   if(color.length === 0) {
-    color = await scrapePage(`https://colorhunt.co/palettes/warm`);
+    color = await scrapePage(`https://colorhunt.co/palettes/cold`);
   }
   res.status(200).json( color as any);
 }

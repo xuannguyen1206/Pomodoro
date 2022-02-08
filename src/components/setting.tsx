@@ -43,7 +43,7 @@ function Setting({selected,toggle,updateTimeSettings}:{selected:boolean,toggle:(
             <div className='py-7 border-y-2 border-solid border-opacity-50 short:p-0'>
               <div className='flex flex-col items-center justify-center md:flex-row md:justify-around'>
                 <h1 className='text-center pb-5 text-sm tracking-[0.25rem] short:pb-2'>DARK MODE</h1>
-                <label className=' relative w-24 h-12 flex inline-block'>
+                <label className=' relative w-24 h-12  inline-block'>
                   <input type='checkbox' className=' opacity-0 w-0 h-0 checked:slide' {...register('darkMode')}/>
                   <span className=' absolute cursor-pointer top-0 bottom-0 left-0 right-0 bg-gray-700 transition-property-[transform] duration-75 rounded-full 
                   before:absolute before:w-[40px] before:h-5/6 before:bg-white before:left-1 before:bottom-1 before:rounded-full before:transition-property-[transform] before:duration-500 '></span>

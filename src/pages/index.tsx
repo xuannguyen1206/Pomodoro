@@ -26,11 +26,11 @@ export interface timeSetting{
 
 const Home: NextPage = () => {
   const [settingOn,setSettingOn] = useState(false);
-  const [taskTab,setTaskTab] = useState(0);
+  const [taskTab,setTaskTab] = useState(2);
   const [timeSetting,SetTimeSetting] = useState<timeSetting>({pomodoro:'1',shortBreak:'1',longBreak:'30',darkMode:false});
   const [clockTime,setClockTime] = useState(1);
   const [clockdone,setclockdone] = useState(false);
-  const [appleNum,setAppleNum] = useState(1);
+  const [appleNum,setAppleNum] = useState(-1);
   const [keeptab,setKeepTab] = useState(false); /* check if tab just got changed in the loop between setTaskTab and clockdone */
   const [circleColors,setCircleColor] = useState([]);
   const [barColor,setBarColor] = useState('');
@@ -55,7 +55,7 @@ const Home: NextPage = () => {
   }
   function updateApple(){
     if(taskTab === 0){
-      if(appleNum === 4 ) setAppleNum(0); else setAppleNum(appleNum+1);
+      if(appleNum === 4 ) setAppleNum(1); else setAppleNum(appleNum+1);
     } else if(taskTab === 2){
       setAppleNum(0);
     }
@@ -63,7 +63,7 @@ const Home: NextPage = () => {
   function updateTaskbar(){
     setKeepTab(true);
     if(taskTab === 0){
-      if(appleNum !== 4){
+      if((appleNum+1) !== 4){
         setTaskTab(1)
       } 
       else {
@@ -131,11 +131,13 @@ const Home: NextPage = () => {
         darkColor.current = [...darkColor.current,...result[0].data] as never;
         lightColor.current = [...lightColor.current,...result[1].data] as never;        
       }).then(()=>{
-        const getWarmColor = axios.get('/api/warm');
+        const getWarmColor = axios.get('/api/cold');
         const getRainbowColor = axios.get('/api/rainbow')
         Promise.all([getWarmColor,getRainbowColor]).then((result)=>{
           darkColor.current = [...darkColor.current,...result[0].data] as never;
-          lightColor.current = [...lightColor.current,...result[1].data] as never;        
+          lightColor.current = [...lightColor.current,...result[1].data] as never;     
+          console.log(darkColor.current.length);
+          console.log(lightColor.current.length);
         })
       })
     })
